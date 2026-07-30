@@ -20,7 +20,6 @@ class Movie(BaseModel):
     summary: str
 
 
-
 parser = PydanticOutputParser(pydantic_object=Movie)
 
 
