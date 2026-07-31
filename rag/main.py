@@ -1,20 +1,22 @@
+from dotenv import load_dotenv
 from langchain_community.document_loaders import TextLoader
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_mistralai import ChatMistralAI
 
-loader = TextLoader("notes.txt")
+load_dotenv()
+
+loader = TextLoader("document-loaders/notes.txt")
 docs = loader.load()
 
 template = ChatPromptTemplate.from_messages([
-    ("system", "You are an AI that summarizes text."),
-    ("human", "{text}")
+    ("system", "You are an expert text summarizer."),
+    ("human", "Summarize the following text in 5 bullet points:\n\n{data}")
 ])
-
 model = ChatMistralAI(model="mistral-small-2506")
 
-prompt = template.invoke({
-    "text": docs[0].page_content
-})
+prompt = template.format_messages(
+    data=docs[0].page_content
+)
 
 result = model.invoke(prompt)
 
