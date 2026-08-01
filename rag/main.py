@@ -11,8 +11,8 @@ loader = PyPDFLoader("document-loaders/GRU.pdf")
 docs = loader.load()
 
 template = ChatPromptTemplate.from_messages([
-    ("system", "You are an expert text summarizer."),
-    ("human", "Summarize the following text in 5 bullet points:\n\n{data}")
+    ("system","You are an expert text summarizer."),
+    ("human","Summarize the following text in 5 bullet points:\n\n{data}")
 ])
 model = ChatMistralAI(model="mistral-small-2506")
 
